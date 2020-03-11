@@ -1,6 +1,9 @@
+import { AppModule } from './../../app/app.module';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FactsComponent } from './facts.component';
+import { FactsService } from 'src/services/facts.service';
 
 describe('FactsComponent', () => {
   let component: FactsComponent;
@@ -8,9 +11,8 @@ describe('FactsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FactsComponent ]
-    })
-    .compileComponents();
+      imports: [AppModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

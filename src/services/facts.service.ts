@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 @Injectable()
 export class FactsService {
+  // was not possible to use https://cat-fact.herokuapp.com/facts because it gives a CORS error
   url = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: HttpClient) {}
@@ -14,7 +15,6 @@ export class FactsService {
     return this.http.get<Fact[]>(this.url).pipe(
       retry(3),
       catchError(err => {
-        console.error('ERROR GET FACTS:', err);
         return of(err);
       })
     );
@@ -30,7 +30,6 @@ export class FactsService {
       .pipe(
         retry(3),
         catchError(err => {
-          console.error('ERROR GET FACTS:', err);
           return of(err);
         })
       );
