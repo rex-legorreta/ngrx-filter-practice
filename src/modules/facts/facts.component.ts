@@ -1,9 +1,10 @@
 import { selectFactTotal, selectLoading } from './../../store/reducers/index';
-import { FactsActionTypes, FilterFacts } from './../../store/actions/facts.actions';
+import { FactsActionTypes, FilterFacts, SetSelectedFactId } from './../../store/actions/facts.actions';
 import { Fact } from './../../models/facts';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-facts',
@@ -16,7 +17,7 @@ export class FactsComponent implements OnInit {
   inputTextChangeTimeout;
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store<{ facts: Fact[] }>) {}
+  constructor(private store: Store<{ facts: Fact[] }>, private router: Router) {}
 
   ngOnInit() {
     this.store.dispatch({ type: FactsActionTypes.LOAD_FACTS });
@@ -38,4 +39,12 @@ export class FactsComponent implements OnInit {
     }
     this.store.dispatch(new FilterFacts({ filterText: this.inputText }));
   };
+
+  goToDetails(fact: Fact) {
+    this.store.dispatch(new SetSelectedFactId({ id: fact.id }));
+    // doing this terrible approach for the lack of time
+    setTimeout(() => {
+      this.router.navigate(['/details']);
+    }, 1000);
+  }
 }

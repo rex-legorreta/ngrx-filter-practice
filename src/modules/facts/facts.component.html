@@ -17,7 +17,7 @@
       <th>Body</th>
       <th>User ID</th>
     </tr>
-    <tr *ngFor="let fact of facts$ | async">
+    <tr *ngFor="let fact of facts$ | async" (click)="goToDetails(fact)" class="clickable">
       <td>{{ fact.id }}</td>
       <td>{{ fact.title }}</td>
       <td>{{ fact.body }}</td>

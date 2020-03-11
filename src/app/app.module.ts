@@ -1,3 +1,4 @@
+import { DetailsModule } from './../modules/details/details.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -25,7 +26,8 @@ import { reducers } from '../store/reducers';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
     AppRoutingModule,
-    FactsModule
+    FactsModule,
+    DetailsModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [AppComponent]

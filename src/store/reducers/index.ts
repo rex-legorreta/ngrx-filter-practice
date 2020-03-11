@@ -1,6 +1,5 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
 import * as fromFact from './facts.reducer';
-import { selectFactEntities, State as ReducerState } from './facts.reducer';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 
 export interface State {
@@ -15,14 +14,18 @@ export const reducers: ActionReducerMap<State> = {
 
 export const selectFactState = createFeatureSelector<fromFact.State>('facts');
 
+export const selectRouterState = createFeatureSelector<State>('router');
+
 export const selectFactTotal = createSelector(selectFactState, fromFact.selectAllFacts);
 
 export const selectCurrentFactId = createSelector(selectFactState, fromFact.getSelectedFactId);
 
-export const selectLoading = createSelector(selectFactState, (state: ReducerState) => state.loading);
+export const selectLoading = createSelector(selectFactState, (state: fromFact.State) => state.loading);
+
+export const selectRouting = createSelector(selectRouterState, (state: State) => state.router);
 
 export const selectCurrentFact = createSelector(
-  selectFactEntities,
-  selectCurrentFactId,
-  (factEntities, factId) => factEntities[factId]
+  selectFactState,
+  fromFact.getSelectedFactId,
+  state => state.entities[state.selectedFactId]
 );
