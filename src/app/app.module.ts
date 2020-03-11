@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -18,6 +19,7 @@ import { reducers } from '../store/reducers';
   imports: [
     BrowserModule,
     HttpClientModule,
+
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),

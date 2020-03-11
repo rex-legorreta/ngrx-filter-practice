@@ -21,8 +21,15 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(state = initialState, action: FactsActions): State {
   switch (action.type) {
+    case FactsActionTypes.LOAD_FACTS:
+      return {
+        ...state,
+        loading: true
+      };
     case FactsActionTypes.LOAD_FACTS_SUCCESS:
-      return adapter.addAll(_.get(action.payload, 'facts', []), state);
+      return adapter.addAll(_.get(action.payload, 'facts', []), { ...state, loading: false });
+    case FactsActionTypes.FILTER_FACTS:
+      return { ...state, loading: true };
     default:
       return state;
   }

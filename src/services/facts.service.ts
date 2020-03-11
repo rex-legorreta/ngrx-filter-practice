@@ -19,4 +19,20 @@ export class FactsService {
       })
     );
   }
+
+  getFilteredFacts(userId: string): Observable<Fact[]> {
+    return this.http
+      .get<Fact[]>(this.url, {
+        params: {
+          userId
+        }
+      })
+      .pipe(
+        retry(3),
+        catchError(err => {
+          console.error('ERROR GET FACTS:', err);
+          return of(err);
+        })
+      );
+  }
 }

@@ -4,7 +4,9 @@ import { Fact } from './../../models/facts';
 
 export enum FactsActionTypes {
   LOAD_FACTS = '[Fact] Load Facts',
-  LOAD_FACTS_SUCCESS = '[Fact] Loaded Facts Successfully'
+  LOAD_FACTS_SUCCESS = '[Fact] Loaded Facts Successfully',
+  FILTER_FACTS = '[Fact] Filter Facts',
+  FILTER_FACTS_SUCCESS = '[Fact] Filter Facts Success'
 }
 
 export class LoadFacts implements Action {
@@ -18,4 +20,10 @@ export class LoadFactsSuccess implements Action {
   constructor(public payload: { facts: Fact[] }) {}
 }
 
-export type FactsActions = LoadFacts | LoadFactsSuccess;
+export class FilterFacts implements Action {
+  readonly type = FactsActionTypes.FILTER_FACTS;
+
+  constructor(public payload: { filterText: string }) {}
+}
+
+export type FactsActions = LoadFacts | LoadFactsSuccess | FilterFacts;

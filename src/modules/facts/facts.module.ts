@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { FactsService } from './../../services/facts.service';
 import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,7 @@ import { FactsEffects } from '../../store/effects/facts.effect';
 
 @NgModule({
   declarations: [FactsComponent],
-  imports: [CommonModule, EffectsModule.forFeature([FactsEffects])],
+  imports: [CommonModule, FormsModule, EffectsModule.forFeature([FactsEffects])],
   providers: [FactsService]
 })
 export class FactsModule {}
